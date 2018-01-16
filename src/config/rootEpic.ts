@@ -1,7 +1,5 @@
 import { combineEpics } from 'redux-observable'
 
-import { Epic } from 'src/config/appTypes'
+import { dataEpic } from 'src/epics/dataEpic'
 
-const epic: Epic = action$ => action$.ofType('A' as any)
-
-export const rootEpic = combineEpics(epic)
+export const rootEpic = combineEpics(dataEpic)

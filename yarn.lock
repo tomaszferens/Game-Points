@@ -82,6 +82,12 @@
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.6.tgz#a4b81ca8cdeb1acbc7923289a4a514f61b59db86"
 
+"@types/firebase@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@types/firebase/-/firebase-3.2.1.tgz#17c1c8fee7485ab09668d2461e34540bdf44b3b1"
+  dependencies:
+    firebase "*"
+
 "@types/history@*":
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.6.2.tgz#12cfaba693ba20f114ed5765467ff25fdf67ddb0"
@@ -1819,7 +1825,7 @@ find-up@^2.0.0, find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
-firebase@^4.8.2:
+firebase@*, firebase@^4.8.2:
   version "4.8.2"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-4.8.2.tgz#5c6878afe2199c382b4a7bde56a21d1bcb4421d3"
   dependencies:
@@ -2428,6 +2434,10 @@ invariant@^2.0.0, invariant@^2.2.1, invariant@^2.2.2:
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
     loose-envify "^1.0.0"
+
+inversify@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/inversify/-/inversify-4.9.0.tgz#caa01f5856cfa0499aaaed9b1a635ef0c4a9f4d3"
 
 invert-kv@^1.0.0:
   version "1.0.0"
@@ -4263,6 +4273,10 @@ redux@^3.6.0, redux@^3.7.2:
     lodash-es "^4.2.1"
     loose-envify "^1.1.0"
     symbol-observable "^1.0.3"
+
+reflect-metadata@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.10.tgz#b4f83704416acad89988c9b15635d47e03b9344a"
 
 regenerate@^1.2.1:
   version "1.3.3"
