@@ -4,7 +4,7 @@ Shopping cart application integrated with firebase.
 ## Table of Contents
 
 - [Running application](#running-application)
-- [Deploy](#running-application)
+- [Demo](#live-demo)
 
 ## Running application
 ```
