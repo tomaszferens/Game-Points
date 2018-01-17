@@ -7,5 +7,5 @@ export const BonusWrapper = glamorous.div({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 50,
+    padding: 20,
 })

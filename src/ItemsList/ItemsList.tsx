@@ -31,7 +31,7 @@ class ItemsListComponent extends React.Component<ItemListProps, {}> {
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Img src={item.imgUrl} onClick={() => this.props.addToCart({ id: item.id })} />
                                 <div>
-                                    {item.name} <small>{item.price}$</small>
+                                    {item.name} <small>(POINTS: {item.price})</small>
                                     {item.hasDiscount && (
                                         <div>
                                             <small>

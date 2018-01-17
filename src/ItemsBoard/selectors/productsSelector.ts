@@ -23,7 +23,7 @@ export const itemsToList = (items: ItemState, cart: CartState, discounts: Discou
                     amount,
                     id,
                     priceWithDiscounts,
-                    isCheaper: regularPrice > priceWithDiscounts,
+                    isCheaper: regularPrice < priceWithDiscounts,
                 },
             ]
         },

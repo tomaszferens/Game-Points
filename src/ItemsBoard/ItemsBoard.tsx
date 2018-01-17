@@ -5,7 +5,7 @@ import { Title, TopBar } from 'src/components'
 import { AppState } from 'src/config/appTypes'
 import { newGame } from 'src/ItemsBoard/actions/actions'
 import { Board, BoardWrapper, BonusWrapper, NewGame, Price, Product } from 'src/ItemsBoard/components'
-import { calculateBonus } from 'src/ItemsBoard/selectors/bonusSelector'
+import { calculateBonus, calculateTotal } from 'src/ItemsBoard/selectors/bonusSelector'
 import { itemsSelector } from 'src/ItemsBoard/selectors/productsSelector'
 import { AnimateWrapper, Img } from 'src/ItemsList/components'
 import { Order } from 'src/models/Item'
@@ -13,6 +13,7 @@ import { Order } from 'src/models/Item'
 interface ConnectedState {
     cart: Order[]
     bonus: number
+    total: number
 }
 
 interface ConnectedDispatch {
@@ -39,15 +40,18 @@ export class ItemsBoardComponent extends React.Component<ItemsBoardProps, {}> {
                                     </span>
                                 </AnimateWrapper>
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                    <Price isCheaper={e.isCheaper}>{(e.amount * e.price).toFixed(2)}</Price>
-                                    {e.isCheaper && <Price> {e.priceWithDiscounts.toFixed(2)} </Price>}
+                                    <Price isCheaper={e.isCheaper}>{e.amount * e.price}</Price>
+                                    {e.isCheaper && <Price> {e.priceWithDiscounts} </Price>}
                                 </div>
                             </Product>
                         </AnimateWrapper>
                     ))}
                 </Board>
-                <BonusWrapper>Bonus: {this.props.bonus}$</BonusWrapper>
-                <NewGame onClick={this.props.newGame}>NEW GAME</NewGame>
+                <BonusWrapper>Bonus: {this.props.bonus} points</BonusWrapper>
+                <NewGame onClick={this.props.newGame}>
+                    <div>TOTAL: {this.props.total}</div>
+                    <div>NEW GAME</div>
+                </NewGame>
             </BoardWrapper>
         )
     }
@@ -58,6 +62,7 @@ function mapStateToProps(state: AppState): ConnectedState {
     return {
         cart,
         bonus: calculateBonus(cart),
+        total: calculateTotal(cart),
     }
 }
 
