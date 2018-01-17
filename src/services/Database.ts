@@ -8,7 +8,7 @@ import { SERVICE } from 'src/config/serviceIdentifiers'
 export class Database {
     constructor(@inject(SERVICE.FIREBASE) private db: firebase.database.Database) {}
 
-    public get(name: string): Observable<firebase.database.DataSnapshot> {
+    public get(name: string): Observable<any> {
         return Observable.fromEvent(this.db.ref(name) as any, 'value').pipe(map((res: any) => res.val()))
     }
 }
