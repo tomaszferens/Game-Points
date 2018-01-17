@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const DefinePlugin = webpack.DefinePlugin
@@ -52,6 +53,7 @@ const config = {
                 NODE_ENV: `'${process.env.NODE_ENV}'`,
             },
         }),
+        new CopyWebpackPlugin([{ from: './static/favicon.png' }]),
     ],
 }
 

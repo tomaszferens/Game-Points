@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 import { Title, TopBar } from 'src/components'
 import { AppState } from 'src/config/appTypes'
-import { BoardWrapper } from 'src/ItemsBoard/components'
+import { BoardWrapper, BonusWrapper } from 'src/ItemsBoard/components'
 import { itemsSelector } from 'src/ItemsBoard/selectors/productsSelector'
-import { Product } from 'src/ItemsList/components'
+import { AnimateWrapper, Img } from 'src/ItemsList/components'
 import { Order } from 'src/models/Item'
 
 interface ConnectedState {
@@ -23,7 +23,28 @@ export class ItemsBoardComponent extends React.Component<ItemsBoardProps, {}> {
                 <TopBar>
                     <Title>PLAYER ITEMS</Title>
                 </TopBar>
-                <div>{this.props.cart.map(e => <Product key={e.id}>{e.name}</Product>)}</div>
+                <div style={{ flex: 1, overflowY: 'scroll' }}>
+                    {this.props.cart.map(e => (
+                        <AnimateWrapper key={e.id}>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    margin: 10,
+                                }}
+                            >
+                                <Img size={50} src={e.imgUrl} />
+                                <AnimateWrapper key={e.id + e.amount}>
+                                    <span>{e.amount}</span>
+                                </AnimateWrapper>
+                                <span>{(e.amount * e.price).toFixed(2)}</span>
+                            </div>
+                        </AnimateWrapper>
+                    ))}
+                </div>
+                <BonusWrapper>Bonus</BonusWrapper>
+                <div style={{ textAlign: 'center', padding: 10 }}>NEW GAME</div>
             </BoardWrapper>
         )
     }

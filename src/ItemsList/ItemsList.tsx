@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Title, TopBar } from 'src/components'
 import { AppState } from 'src/config/appTypes'
 import { addToCart } from 'src/ItemsList/actions/actions'
-import { List, ListWrapper, Product } from 'src/ItemsList/components'
+import { AnimateWrapper, Img, List, ListWrapper } from 'src/ItemsList/components'
 import { allItems } from 'src/ItemsList/selectors/itemsSelector'
 import { Item } from 'src/models/Item'
 
@@ -27,9 +27,12 @@ class ItemsListComponent extends React.Component<ItemListProps, {}> {
                 </TopBar>
                 <List>
                     {this.props.items.map(item => (
-                        <Product onClick={() => this.props.addToCart({ id: item.id })} key={item.id}>
-                            {item.name}
-                        </Product>
+                        <AnimateWrapper key={item.id}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Img src={item.imgUrl} onClick={() => this.props.addToCart({ id: item.id })} />
+                                <span>{item.name}</span>
+                            </div>
+                        </AnimateWrapper>
                     ))}
                 </List>
             </ListWrapper>

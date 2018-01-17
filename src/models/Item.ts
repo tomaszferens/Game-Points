@@ -6,6 +6,15 @@ export interface ItemState {
     [id: string]: {
         name: string
         price: number
+        imgUrl: string
+    }
+}
+
+export interface DiscountsState {
+    [id: string]: {
+        itemId: string
+        for: string
+        get: string
     }
 }
 
@@ -13,6 +22,7 @@ export interface Item {
     name: string
     price: number
     id: string
+    imgUrl: string
 }
 
 export interface Order {
@@ -20,4 +30,5 @@ export interface Order {
     price: number
     name: string
     id: string
+    imgUrl: string
 }

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import 'reflect-metadata'
 
 import 'rxjs/add/observable/fromEvent'
+import 'rxjs/add/observable/of'
 import 'rxjs/add/operator/map'
 
 import { App } from './App/App'
