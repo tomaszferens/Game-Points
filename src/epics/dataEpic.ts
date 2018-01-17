@@ -9,13 +9,13 @@ import { Database } from 'src/services/Database'
 const items$: Epic = () =>
     container
         .get<Database>(SERVICE.DATABASE)
-        .get('items')
+        .getData('items')
         .map(fetchItemsFulfilled)
 
 const discounts$: Epic = () =>
     container
         .get<Database>(SERVICE.DATABASE)
-        .get('discounts')
+        .getData('discounts')
         .map(fetchDiscounstFulfilled)
 
 export const dataEpic = combineEpics(items$, discounts$)
