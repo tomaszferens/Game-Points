@@ -3,16 +3,21 @@ import { connect } from 'react-redux'
 
 import { Title, TopBar } from 'src/components'
 import { AppState } from 'src/config/appTypes'
-import { BoardWrapper, BonusWrapper } from 'src/ItemsBoard/components'
+import { newGame } from 'src/ItemsBoard/actions/actions'
+import { Board, BoardWrapper, BonusWrapper, NewGame, Price, Product } from 'src/ItemsBoard/components'
+import { calculateBonus } from 'src/ItemsBoard/selectors/bonusSelector'
 import { itemsSelector } from 'src/ItemsBoard/selectors/productsSelector'
 import { AnimateWrapper, Img } from 'src/ItemsList/components'
 import { Order } from 'src/models/Item'
 
 interface ConnectedState {
     cart: Order[]
+    bonus: number
 }
 
-interface ConnectedDispatch {}
+interface ConnectedDispatch {
+    newGame: typeof newGame
+}
 
 type ItemsBoardProps = ConnectedState & ConnectedDispatch
 
@@ -23,37 +28,39 @@ export class ItemsBoardComponent extends React.Component<ItemsBoardProps, {}> {
                 <TopBar>
                     <Title>PLAYER ITEMS</Title>
                 </TopBar>
-                <div style={{ flex: 1, overflowY: 'scroll' }}>
+                <Board>
                     {this.props.cart.map(e => (
                         <AnimateWrapper key={e.id}>
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    margin: 10,
-                                }}
-                            >
+                            <Product>
                                 <Img size={50} src={e.imgUrl} />
                                 <AnimateWrapper key={e.id + e.amount}>
-                                    <span>{e.amount}</span>
+                                    <span>
+                                        {e.amount} * {e.price}
+                                    </span>
                                 </AnimateWrapper>
-                                <span>{(e.amount * e.price).toFixed(2)}</span>
-                            </div>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <Price isCheaper={e.isCheaper}>{(e.amount * e.price).toFixed(2)}</Price>
+                                    {e.isCheaper && <Price> {e.priceWithDiscounts.toFixed(2)} </Price>}
+                                </div>
+                            </Product>
                         </AnimateWrapper>
                     ))}
-                </div>
-                <BonusWrapper>Bonus</BonusWrapper>
-                <div style={{ textAlign: 'center', padding: 10 }}>NEW GAME</div>
+                </Board>
+                <BonusWrapper>Bonus: {this.props.bonus}$</BonusWrapper>
+                <NewGame onClick={this.props.newGame}>NEW GAME</NewGame>
             </BoardWrapper>
         )
     }
 }
 
 function mapStateToProps(state: AppState): ConnectedState {
+    const cart = itemsSelector(state)
     return {
-        cart: itemsSelector(state),
+        cart,
+        bonus: calculateBonus(cart),
     }
 }
 
-export const ItemsBoard = connect<ConnectedState, ConnectedDispatch, {}, AppState>(mapStateToProps)(ItemsBoardComponent)
+export const ItemsBoard = connect<ConnectedState, ConnectedDispatch, {}, AppState>(mapStateToProps, { newGame })(
+    ItemsBoardComponent,
+)

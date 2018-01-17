@@ -9,19 +9,21 @@ export const itemsToList = (items: ItemState, cart: CartState, discounts: Discou
         cart,
         (acc, amount, id) => {
             const discount = _find<DiscountsState>(discounts, { itemId: id })
-            const withDiscount = discount
-                ? items[id].price * amount -
-                  Math.floor(amount / Number(discount.get)) *
-                      (Number(discount.get) - Number(discount.for)) *
-                      items[id].price
-                : items[id].price
+            const item = items[id]
+            const regularPrice = item.price * amount
+            const priceWithDiscounts = discount
+                ? regularPrice -
+                  Math.floor(amount / Number(discount.get)) * (Number(discount.get) - Number(discount.for)) * item.price
+                : regularPrice
+
             return [
                 ...acc,
                 {
-                    ...items[id],
+                    ...item,
                     amount,
                     id,
-                    withDiscount,
+                    priceWithDiscounts,
+                    isCheaper: regularPrice > priceWithDiscounts,
                 },
             ]
         },

@@ -30,7 +30,16 @@ class ItemsListComponent extends React.Component<ItemListProps, {}> {
                         <AnimateWrapper key={item.id}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Img src={item.imgUrl} onClick={() => this.props.addToCart({ id: item.id })} />
-                                <span>{item.name}</span>
+                                <div>
+                                    {item.name} <small>{item.price}$</small>
+                                    {item.hasDiscount && (
+                                        <div>
+                                            <small>
+                                                {item.get} for {item.for}
+                                            </small>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </AnimateWrapper>
                     ))}

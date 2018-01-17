@@ -23,6 +23,9 @@ export interface Item {
     price: number
     id: string
     imgUrl: string
+    get: number | null
+    for: number | null
+    hasDiscount: boolean
 }
 
 export interface Order {
@@ -31,4 +34,6 @@ export interface Order {
     name: string
     id: string
     imgUrl: string
+    priceWithDiscounts: number
+    isCheaper: boolean
 }

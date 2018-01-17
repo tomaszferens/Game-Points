@@ -1,9 +1,10 @@
 import { Epic as _Epic } from 'redux-observable'
 
+import { BoardAction } from 'src/ItemsBoard/actions/actions';
 import { ItemListAction } from 'src/ItemsList/actions/actions'
 import { CartState, DiscountsState, ItemState } from 'src/models/Item'
 
-export type AppAction = ItemListAction
+export type AppAction = ItemListAction | BoardAction
 
 export interface AppState {
     cart: CartState
